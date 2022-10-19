@@ -1,0 +1,67 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<nav  style="margin-bottom: 10px" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/"><i class="fa-solid fa-truck"></i> Delivery</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="<c:url value="/directions"/>">Directions</a>
+                        </li>
+                        <li><a class="dropdown-item" href="<c:url value="/tariffs"/>">Tariffs</a>
+                        </li>
+                        <li >
+                            <a class="dropdown-item" href="<c:url value="/calc"/>">Calculate price</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <li class="nav-item">
+                    <c:if test="${loginedUser.role == \"admin\"}">
+                        <a class="nav-link" href="<c:url value="/users"/>">Users</a>
+                    </c:if>
+                </li>
+
+                <li class="nav-item">
+                    <c:if test="${loginedUser!=null}">
+                        <a class="nav-link" href="<c:url value="/delivery"/>">Create delivery</a>
+                    </c:if>
+                </li>
+
+
+
+            </ul>
+
+            <li style="list-style-type: none">
+                <c:if test="${loginedUser!=null}">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Hello, ${loginedUser.getEmail()}!
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<c:url value="/userPage"/>">My deliveries</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/logout"/>">logout</a></li>
+                        </ul>
+                    </div>
+
+                </c:if>
+                <c:if test="${loginedUser==null}">
+                    <a class="btn btn-primary" href="<c:url value="/login"/>">login</a>
+                </c:if>
+            </li>
+        </div>
+    </div>
+</nav>
